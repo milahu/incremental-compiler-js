@@ -1,11 +1,11 @@
 {
-  "name": "nix-eval-js",
+  "name": "incremental-compiler-js",
   "version": "0.0.1",
-  "description": "run nix code in javascript",
-  "main": "src/nix-eval.js",
+  "description": "incremental compiler in javascript",
+  "main": "src/index.js",
   "type": "module",
   "bin": {
-    "nix-eval": "./src/nix-eval-cli.js"
+    "nix-eval": "./src/cli.js"
   },
   "scripts": {
     "test": "ava",
@@ -21,21 +21,13 @@
     "verbose": true
   },
   "keywords": [
-    "nix",
-    "nixos",
-    "nixpkgs",
-    "eval",
-    "evaluator",
-    "interpreter",
-    "incremental-interpreter",
-    "incremental-evaluator",
-    "incremental-evaluation",
+    "incremental",
     "incremental-compiler",
     "incremental-compilation",
     "live-coding",
     "lezer-parser",
     "vanillajs",
-    "toy-interpreter"
+    "toy-compiler"
   ],
   "author": "Milan Hauth",
   "license": "MIT",

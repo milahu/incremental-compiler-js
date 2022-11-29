@@ -1,24 +1,14 @@
-# nix-eval-js
+# incremental-compiler-js
 
-[nix](https://github.com/NixOS/nix) interpreter in javascript
+incremental compiler in javascript
 
 ## status
 
 early draft
 
-for a list of implemented features, see [test/nix-eval.snapshots.txt](test/nix-eval.snapshots.txt)
-
-### autocompletion
-
-a very simple version of autocompletion is working
-
-this is based on the last valid eval state
-
-see the demo
-
 ## demo
 
-[nix-eval-js demo](https://milahu.github.io/nix-eval-js/demo/dist/)
+[incremental-compiler-js demo](https://milahu.github.io/incremental-compiler-js/demo/dist/)
 
 ## documentation
 
@@ -27,22 +17,9 @@ see [docs/](docs/)
 ## install
 
 ```sh
-git clone --recurse-submodules https://github.com/milahu/nix-eval-js
-cd nix-eval-js
+git clone --recurse-submodules https://github.com/milahu/incremental-compiler-js
+cd incremental-compiler-js
 pnpm install
-```
-
-### commands
-
-```sh
-./bin/nix-parse -e 1+1
-./bin/nix-eval -e 1+1
-
-./bin/nix-parse -f /etc/nixos/configuration.nix
-./bin/nix-eval -f /etc/nixos/configuration.nix
-
-./bin/nix-parse -f ~/src/nixpkgs/pkgs/top-level/all-packages.nix
-./bin/nix-eval -f ~/src/nixpkgs/pkgs/top-level/all-packages.nix
 ```
 
 ### offline demo
@@ -55,64 +32,48 @@ npm run dev
 
 ## goals
 
-### incremental evaluator
+### incremental compiler
 
-create a prototype for an **incremental** evaluator
+create a prototype for an **incremental** compiler
 
 #### example
 
-```nix
-__head [ 1 ]
+input version 1
+
+```jsx
+function App(props) {
+  return (
+    <div>hello</div>
+  )
+}
 ```
 
-this evaluates to the result `1`
+input version 2
 
-adding values to the list does not change the result
-
-```nix
-__head [ 1 2 ]
+```jsx
+function App(props) {
+  return (
+    <div>hello world</div>
+  )
+}
 ```
 
-still evaluates to the result `1`
+input difference
 
-only changing the first value changes the result
-
-```nix
-__head [ 3 ]
+```diff
+-    <div>hello</div>
++    <div>hello world</div>
 ```
-
-this evaluates to the result `3`
-
-### intellisense
-
-#### autocompletion
-
-```nix
-let
-  pkgs = {
-    hello = ''
-      #! /bin/sh
-      echo hello
-    '';
-  };
-in
-pkgs.
-#    ^ cursor
-```
-
-at this cursor, i want the autocompletion `hello`
-
-this should also work with `callPackage` and `makeScope`
 
 ## related
 
-* [rnix-lsp](https://github.com/nix-community/rnix-lsp) - language server for nix
-* [lezer-parser-nix](https://github.com/milahu/lezer-parser-nix) - nix parser in javascript
-* [nixos-config-webui](https://github.com/milahu/nixos-config-webui) - old project
-* [nijs](https://github.com/svanderburg/nijs) - Nix bindings for JavaScript
+* [nix-eval-js](https://github.com/milahu/nix-eval-js) - nix interpreter in javascript, based on lezer-parser
 
 ## keywords
 
-* nix evaluator in javascript
-* eval nix code in javascript
-* evaluate nix code in javascript
+* incremental compiler in javascript
+* incremental compilation in javascript
+* chain of multiple compilers
+* compiler pipeline
+* compiler chain
+* low latency
